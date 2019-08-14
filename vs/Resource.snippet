@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>Resource</Title>
+      <Author>
+      </Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>r</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="false">
+          <ID>_namespace_</ID>
+          <ToolTip>
+          </ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>prjname</ID>
+          <ToolTip>prjname</ToolTip>
+          <Default>prjname</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>prjnamespace</ID>
+          <ToolTip>prjnamespace</ToolTip>
+          <Default>prjnamespace</Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[using System;
+using System.Collections.Generic;
+using System.Resources;
+using System.Text;
+
+namespace $_namespace_$
+{
+    public static class R
+    {
+        public static string QMPrefix => $"{K.Core.R.Company.Namespace}_{Project.Namespace}";
+        private static System.Reflection.Assembly Assembly => System.Reflection.Assembly.GetExecutingAssembly();
+        private static ResourceManager resx;
+
+        public static string Language = Project.Language;
+        public static int ID => Project.ID;
+        public static string[] Resources => Assembly.GetManifestResourceNames();
+        public static ResourceManager Resx
+        {
+            get
+            {
+                if (resx == null)
+                    resx = new ResourceManager($"{typeof(R).Namespace}.Content.Location_{R.Project.Language}", Assembly);
+
+                return resx;
+            }
+        }
+        public static class Project
+        {
+            public static string Language => K.Core.R.Language;
+            public const string Name = "$prjname$";
+            public const string Namespace = "$prjnamespace$";
+            public static Version Version => R.Assembly.GetName().Version;
+            public static int ID => Version.Major;
+        }
+        public static class Security
+        {
+            public static string MasterKey => K.Core.R.Security.MasterKey;
+            public const int Expire = K.Core.R.Security.Expire;
+        }        
+    }
+}
+]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

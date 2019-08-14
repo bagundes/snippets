@@ -12,7 +12,7 @@
       </Description>
       <HelpUrl>
       </HelpUrl>
-      <Shortcut>r</Shortcut>
+      <Shortcut>my_resource</Shortcut>
     </Header>
     <Snippet>
       <Declarations>
@@ -40,14 +40,7 @@
           </Function>
         </Literal>
       </Declarations>
-      <Code Language="csharp" Delimiter="$"><![CDATA[using System;
-using System.Collections.Generic;
-using System.Resources;
-using System.Text;
-
-namespace $_namespace_$
-{
-    public static class R
+      <Code Language="csharp" Delimiter="$"><![CDATA[    public static class R
     {
         public static string QMPrefix => $"{K.Core.R.Company.Namespace}_{Project.Namespace}";
         private static System.Reflection.Assembly Assembly => System.Reflection.Assembly.GetExecutingAssembly();
@@ -80,7 +73,6 @@ namespace $_namespace_$
             public const int Expire = K.Core.R.Security.Expire;
         }        
     }
-}
 ]]></Code>
     </Snippet>
   </CodeSnippet>
